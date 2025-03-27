@@ -68,15 +68,18 @@ for d in dates:
         price = int(price_str)
         # data.append((d.strftime("%Y-%m"), price))
         # print(f"{d.strftime('%Y-%m')} → {price}")
-        data.append((d, date_str, price))
-        print(f"{d} ({date_str}) → {price}")
+        
+        price = int(price_str)
+        price_short = round(price / 10000)
+        data.append((d, date_str, price, price_short))
+        print(f"{d} ({date_str}) → {price} → {price_short} Hezar Toman")
 
     except Exception as e:
-        data.append((d, "", ""))
+        data.append((d, "", "", ""))
         print(f"Error for {from_str}: {e}")
 
 driver.quit()
 
-df = pd.DataFrame(data, columns=["JMonth", "GMonth", "Price"])
+df = pd.DataFrame(data, columns=["JMonth", "GMonth", "Price", "Price(Hezar Toman)"])
 df.to_csv("euro_monthly_representative_price.csv", index=False)
 print("✅ Saved.")
